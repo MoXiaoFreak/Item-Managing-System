@@ -1,0 +1,89 @@
+# depslib dependency file v1.0
+1532827819 source:e:\item managing system\main.c
+	"head.h"
+	"conponents.h"
+
+1532829765 e:\item managing system\head.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	<string.h>
+	<dos.h>
+	"definitions.h"
+
+1532623624 source:e:\item managing system\menu.c
+	"head.h"
+
+1532623590 source:e:\item managing system\setposition.c
+	"head.h"
+
+1532623918 source:e:\item managing system\inputrecord.c
+	"head.h"
+
+1532624621 e:\item managing system\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	<string.h>
+	<dos.h>
+
+1532624621 e:\item managing system\setposition.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	<string.h>
+	<dos.h>
+
+1532624621 e:\item managing system\inputrecord.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	<string.h>
+	<dos.h>
+
+1532655852 e:\item managing system\conponents.h
+	"menu.h"
+	"system.h"
+	"commodityinfo.h"
+	"menuregister.h"
+	"user.h"
+	"search.h"
+	"table.h"
+
+1532829961 e:\item managing system\menu.h
+	"head.h"
+
+1532625845 e:\item managing system\setposition.h
+	"head.h"
+
+1532625975 e:\item managing system\inputrecord.h
+	"head.h"
+
+1532625965 e:\item managing system\setcolor.h
+	"head.h"
+
+1532829193 e:\item managing system\definitions.h
+	"head.h"
+
+1532655633 e:\item managing system\system.h
+	"head.h"
+
+1532829597 e:\item managing system\commodityinfo.h
+	"head.h"
+
+1532828017 e:\item managing system\menuregister.h
+	"head.h"
+
+1532826000 e:\item managing system\user.h
+	"head.h"
+
+1532656326 e:\item managing system\search.h
+	"head.h"
+
+1532657238 e:\item managing system\table.h
+	"head.h"
+
