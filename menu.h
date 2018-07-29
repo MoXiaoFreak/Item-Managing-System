@@ -47,6 +47,6 @@ void Menu()
         case 5:TotalCommodityInfo();break;
         case 6:ModifyCommodityInfo();break;
         case 0:exit(0);
-        default:printf("ERROR");break;
+        default:printf("ERROR");exit(0);
     }
 }

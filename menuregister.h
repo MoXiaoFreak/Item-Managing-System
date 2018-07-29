@@ -4,11 +4,11 @@ void MenuRegister()
     int i=0,j=0,n;
     system("cls");
     SetPosition(getx,gety);
-    printf("X--------------------µÇÂ¼-------------------X");
+    printf("©°--------------------µÇÂ¼-------------------©´");
     SetPosition(getx,gety+13);
-    printf("X");
+    printf("©¸");
     SetPosition(getx+46,gety+13);
-    printf("X");
+    printf("©¼");
     for(i=2;i<46;i++)
     {
         SetPosition(getx+i,gety+13);
@@ -24,16 +24,16 @@ void MenuRegister()
     SetPosition(getx+16,gety+5);
     printf("1.User Login");
     SetPosition(getx+16,gety+8);
-    printf("2.User Register");
+    printf("2.exit");
     SetPosition(getx,gety+16);
     printf("please choose:");
     scanf("%d",&n);
     switch(n)
     {
-    case 1:UserLogin();break;
-    case 0:UserRegister();break;
-    default:system("pause");
+        case 1:UserLogin();break;
+        case 2:exit(0);break;
+        default:system("pause");
     }
-
+    return Menu();
     // UserRegister()
 }

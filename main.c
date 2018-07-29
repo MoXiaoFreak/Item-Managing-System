@@ -3,9 +3,10 @@
 
 int main()                              //Ö÷º¯Êı
 {
-    MenuRegister();
+    Menu();
     return 0;
 }
+
 
 
 

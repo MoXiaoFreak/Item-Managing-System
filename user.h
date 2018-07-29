@@ -1,5 +1,6 @@
 #include "head.h"
-
+//需要重写，计划按照Commodity修改
+/*
 void UserRegister()
 {
     FILE *fp;
@@ -87,17 +88,18 @@ void UserLogin()
     }while(temp=='2');
     return Menu();
 }
-/*
+*/
+
 void ReadData()
 {
-    int total=GetPrivateProfileInt("INFO","count",0,"e:\\Info.dat");
+    int total=GetPrivateProfileInt("INFO","count",0,"e:\\Info.ini");
     int i;
     char t[5]={"\0"};
     for(i=0;i<total;i++)
     {
         sprintf(t,"%d",i+1);
-        GetPrivateProfileString(t,"USERNAME","",user[i].username,20,"e:\\Info.dat");
-        GetPrivateProfileString(t,"PASSWORD","",user[i].password,20,"e:\\Info.dat");
+        GetPrivateProfileString(t,"USERNAME","",user[i].username,20,"e:\\Info.ini");
+        GetPrivateProfileString(t,"PASSWORD","",user[i].password,20,"e:\\Info.ini");
     }
 }
 
@@ -145,10 +147,10 @@ void UserLogin()
         }
         if(f_u==0)
         {
-            printf("\n\n不存在该用户名！ 选 1 重新输入，选 2 注册新用户");
-            int c=0;
+            printf("\n\n不存在该用户名！ 选 1 重新输入，选 2 注册新用户:\n");
+            char c;
             fflush(stdin);
-            c=_getche();
+            c=getchar();
             if(c=='1')
             {
                 continue;
@@ -193,9 +195,9 @@ void UserLogin()
                     total++;
                     char t[5]={"\0"};
                     sprintf(t,"%d",total);
-                    WritePrivateProfileString("INFO","count",t,"e:\\Info.dat");
-                    WritePrivateProfileString(t,"USERNAME",username,"e:\\Info.dat");
-                    WritePrivateProfileString(t,"PASSWORD",password,"e:\\Info.dat");
+                    WritePrivateProfileString("INFO","count",t,"e:\\Info.ini");
+                    WritePrivateProfileString(t,"USERNAME",username,"e:\\Info.ini");
+                    WritePrivateProfileString(t,"PASSWORD",password,"e:\\Info.ini");
                     printf("\n\n注册成功，请重新登录");
                     fflush(stdin);
                     _getch();
@@ -221,7 +223,7 @@ void UserLogin()
                 printf("\n\n连续输入3次错误，程序将退出");
                 fflush(stdin);
                 _getche();
-                return ;
+                exit(0);
             }
             printf("\n\n密码输入错误，请重新输入");
             fflush(stdin);
@@ -230,92 +232,3 @@ void UserLogin()
     }
     return ;
 }
-*/
-/*
-bool search(char id[], char pass[])
-{
-    *fp;
-    char tid[10], tpass[10];
-    fp = fopen("c:\\data", "rt+");
-    while (!feof(fp))
-    {
-        fscanf(fp, "%s%s", tid, tpass);
-        if ((tid, id)==0 &&(tpass, pass)==0)
-        {
-            fclose(fp);
-            return true;
-        }
-    }
-    fclose(fp);
-    return false;
-}
-bool login() {
-char id[10], pass[10];
-printf("Login\nPress the id: ");
-scanf("%s", id);
-printf("Press the password: ");
-// 可以自行将password处理成*号, 如果不会可以发信给我
-scanf("%s", pass);
-printf("-----------------------");
-if (search(id, pass))
-return true;
-else
-return false;
-}
-void _add(char id[], char pass[]) {
-*fp;
-fp=fopen("c:\\data", "a");
-// 在写入文件时可以按一定的排序方式插入，可减少以后Login时的search时间
-fprintf(fp, "%s %s\n", id, pass);
-fclose(fp);
-}
-void regis() {
-char id[10], pass[10], tpass[10];
-printf("Register\nPress the id: ");
-scanf("%s", id);
-while (true) {
-printf("Press the password: ");
-scanf("%s", pass);
-printf("Press the password again: ");
-scanf("%s", tpass);
-if (
-(pass, tpass) != 0)
-printf("The passwords you pressed are not the same!\n");
-else
-break;
-}
-_add(id, pass);
-printf("-----------------------Register successfully!\n");
-}
-void init() {
-*fp;
-if ((fp=fopen("c:\\data", "rt+")) ==) { // 注意，一定要有个名叫data（没有）的合法文件在C盘
-printf("---------File is not exist\n");
-system("pause");
-exit(0);
-}
-else
-fclose(fp);
-}
-int main(void){
-int command;
-init(); // 检查data文件在不在
-while (true) {
-printf("-----------------------(Login: 1 Register: 2 Exit: 3)\n");
-scanf("%d", &command);
-printf("-----------------------\n");
-// 这里可以编写command的检测语句
-if (command == 3)
-break;
-else if (command == 1) {
-if (!login())
-printf("ID is not exist or password is wrong!\n");
-else
-printf("Login successfully!\n");
-}
-else
-regis();
-}
-return 0;
-}
-*/

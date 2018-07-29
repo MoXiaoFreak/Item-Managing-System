@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1532827819 source:e:\item managing system\main.c
+1532852524 source:e:\item managing system\main.c
 	"head.h"
 	"conponents.h"
 
-1532831755 e:\item managing system\head.h
+1532852315 e:\item managing system\head.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -54,7 +54,7 @@
 	"search.h"
 	"table.h"
 
-1532829961 e:\item managing system\menu.h
+1532846979 e:\item managing system\menu.h
 	"head.h"
 
 1532625845 e:\item managing system\setposition.h
@@ -72,16 +72,16 @@
 1532655633 e:\item managing system\system.h
 	"head.h"
 
-1532832479 e:\item managing system\commodityinfo.h
+1532890080 e:\item managing system\commodityinfo.h
 	"head.h"
 
-1532828017 e:\item managing system\menuregister.h
+1532846383 e:\item managing system\menuregister.h
 	"head.h"
 
-1532833507 e:\item managing system\user.h
+1532847460 e:\item managing system\user.h
 	"head.h"
 
-1532656326 e:\item managing system\search.h
+1532852419 e:\item managing system\search.h
 	"head.h"
 
 1532657238 e:\item managing system\table.h
