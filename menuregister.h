@@ -24,14 +24,14 @@ void MenuRegister()
     SetPosition(getx+16,gety+5);
     printf("1.User Login");
     SetPosition(getx+16,gety+8);
-    printf("0.exit");
+    printf("2.User Register");
     SetPosition(getx,gety+16);
     printf("please choose:");
     scanf("%d",&n);
     switch(n)
     {
     case 1:UserLogin();break;
-    case 0:printf("\n sdafaf");break;
+    case 0:UserRegister();break;
     default:system("pause");
     }
 

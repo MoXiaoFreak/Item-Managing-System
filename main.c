@@ -3,7 +3,7 @@
 
 int main()                              //Ö÷º¯Êı
 {
-    Menu();
+    MenuRegister();
     return 0;
 }
 

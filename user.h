@@ -85,7 +85,7 @@ void UserLogin()
             }
         }
     }while(temp=='2');
-
+    return Menu();
 }
 /*
 void ReadData()
