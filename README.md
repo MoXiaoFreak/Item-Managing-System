@@ -1,1 +1,2 @@
-# Commodity-Managing-System
+## Commodity-Managing-System
+# FXXKING project in summer vacation,,,
