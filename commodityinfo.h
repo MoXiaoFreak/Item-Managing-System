@@ -1,6 +1,7 @@
 #include "head.h"
 void AddCommodityInfo()
 {
+    struct commodity comm1[50];
   const char *filename = COMMODITYINFO;
   int count=0;
     char b='1';
@@ -13,7 +14,7 @@ void AddCommodityInfo()
 		system("pause");
 		return Menu();
 	}
-	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
+	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm1[i].num,comm1[i].name,&comm1[i].price,&comm1[i].counts,&comm1[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
 	{
 		i++;
 		count=i;
@@ -22,36 +23,36 @@ void AddCommodityInfo()
 	{
         printf("请输入添加商品的信息：\n");
         repeat1:printf("商品编号：");
-        scanf("%d",&comm[count+1].num);
+        scanf("%d",&comm1[count+1].num);
         for(i=0;i<count+1;i++)
         {
-        	if(comm[i].num==comm[count+1].num)
+        	if(comm1[i].num==comm1[count+1].num)
         	{
         		printf("商品编号已存在，请重新输入。\n");
         		goto repeat1;
         	}
         }
-        fprintf(fp,"%d\t",comm[count+1].num);
+        fprintf(fp,"%d\t",comm1[count+1].num);
         repeat2:printf("商品名称：");
-        scanf("%s",comm[count+1].name);
+        scanf("%s",comm1[count+1].name);
         for(i=0;i<count+1;i++)
         {
-        	if(strcmp(comm[i].name,comm[count+1].name)==0)
+        	if(strcmp(comm1[i].name,comm1[count+1].name)==0)
         	{
         		printf("商品名称已经存在，请重新输入。\n");
         		goto repeat2;
         	}
         }
-        fprintf(fp,"%s\t",comm[count+1].name);
+        fprintf(fp,"%s\t",comm1[count+1].name);
         printf("商品价格：");
-        scanf("%lf",&comm[count+1].price);
-        fprintf(fp,"%lf\t",comm[count+1].price);
+        scanf("%lf",&comm1[count+1].price);
+        fprintf(fp,"%lf\t",comm1[count+1].price);
         printf("商品库存：");
-        scanf("%lf",&comm[count+1].counts);
-        fprintf(fp,"%lf\t",comm[count+1].counts);
+        scanf("%lf",&comm1[count+1].counts);
+        fprintf(fp,"%lf\t",comm1[count+1].counts);
         printf("商品总价：");
-        scanf("%lf",&comm[count+1].total);
-        fprintf(fp,"%lf\t\n",comm[count+1].total);
+        scanf("%lf",&comm1[count+1].total);
+        fprintf(fp,"%lf\t\n",comm1[count+1].total);
         count=count+1;
         printf("录入成功！\n");
         printf("是否继续录入商品：输入'1'为是，其他为否:\n");
@@ -65,6 +66,7 @@ void AddCommodityInfo()
 }
 void DelCommodityInfo()
 {
+     struct commodity comm2[50];
 	const char *filename = COMMODITYINFO;
     int delnum,x,y=0,cho,rdel;
     int count=0;
@@ -76,16 +78,16 @@ void DelCommodityInfo()
 		system("pause");
 		return Menu();
 	}
-	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
+	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm2[i].num,comm2[i].name,&comm2[i].price,&comm2[i].counts,&comm2[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
 	{
 		i++;
 		count=i;
 	}
-	printf("请输入你想要删除的商品编号：\n");
-repeat1:scanf("%d",&delnum);
+	repeat1:printf("请输入你想要删除的商品编号：\n");
+        scanf("%d",&delnum);
 		for(i=0;i<count;i++)
 		{
-			if(delnum==comm[i].num)
+			if(delnum==comm2[i].num)
 				{
 					y=1;
 					cho=i;
@@ -93,39 +95,49 @@ repeat1:scanf("%d",&delnum);
 		}
 		if(y!=1)
 		{
-			printf("您输入的商品编号不存在。");
+			printf("您输入的商品编号不存在。\n");
 			goto repeat1;
 		}
 	printf("您所要删除商品的信息：\t编号\t|名称\t|价格\t\t|数量\t\t|总价\n");
-	printf("                      \t %d \t| %s \t| %lf\t| %lf\t| %lf\n",comm[cho].num,comm[cho].name,comm[cho].price,comm[cho].counts,comm[cho].total);
+	printf("                      \t %d \t| %s \t| %lf\t| %lf\t| %lf\n",comm2[cho].num,comm2[cho].name,comm2[cho].price,comm2[cho].counts,comm2[cho].total);
 	printf("确定要删除吗？(输入1为是，其他为否：)");
 	scanf("%d",&x);
 	if(x==1)
 	{
 		for(j=cho;j<count-1;j++)
 		{
-			comm[j]=comm[j+1];
+			comm2[j]=comm2[j+1];
 			fclose(fp);
 		}
 		fp=fopen(filename,"w");
 		for(j=0;j<count-1;j++)
 		{
-			fprintf(fp,"%d\t%s\t%lf\t%lf\t%lf\t\n",comm[j].num,comm[j].name,comm[j].price,comm[j].counts,comm[j].total);
+			fprintf(fp,"%d\t%s\t%lf\t%lf\t%lf\t\n",comm2[j].num,comm2[j].name,comm2[j].price,comm2[j].counts,comm2[j].total);
 		}
 		printf("删除成功。\n");
 		count--;
 
 	}else
 		printf("退出");
-		printf("是否继续删除？输入1为是，其他为否");
+        printf("是否继续删除？输入1为是，其他为否");
 		scanf("%d",&rdel);
 		if(rdel==1)
-			DelCommodityInfo();
+        {
+            if (count==0)
+            {
+                printf("无商品信息,返回主菜单\n");
+                system("pause");
+                return Menu();
+            }
+            else goto repeat1;
+        }
+        DelCommodityInfo();
 		fclose(fp);
 		return Menu();
 }
 void TotalCommodityInfo()
 {
+    struct commodity comm3[50];
     const char *filename = COMMODITYINFO;
     int count=0;
     int i=0,j;
@@ -137,7 +149,7 @@ void TotalCommodityInfo()
 		printf("Can not open file\n");
 		exit(1);
 	}
-	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
+	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm3[i].num,comm3[i].name,&comm3[i].price,&comm3[i].counts,&comm3[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
 	{
 		i++;
 		count=i;
@@ -145,8 +157,8 @@ void TotalCommodityInfo()
 	for(j=0;j<count;j++)
     {
         sumnum++;
-        sumcounts= sumcounts+comm[j].counts;
-        sumtotal=sumtotal+comm[j].total;
+        sumcounts= sumcounts+comm3[j].counts;
+        sumtotal=sumtotal+comm3[j].total;
     }
     system("cls");
     printf("共%d种商品  总数量%6.lf件  总价%6.lf元\n\n",sumnum,sumcounts,sumtotal);
@@ -155,6 +167,7 @@ void TotalCommodityInfo()
 }
 void ModifyCommodityInfo()//没有输出到文件
 {
+    struct commodity comm4[50];
     FILE *fp;
     int i=0,j,mnum,a,tnum;
     char get[20];
@@ -165,12 +178,10 @@ void ModifyCommodityInfo()//没有输出到文件
 		printf("Can not open file\n");
 		exit(1);
 	}
-
-	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))
+	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm4[i].num,comm4[i].name,&comm4[i].price,&comm4[i].counts,&comm4[i].total))
 	{
 		i++;
 	}
-
 	j=i;
 	if(i==0)
     {
@@ -178,34 +189,33 @@ void ModifyCommodityInfo()//没有输出到文件
     }else
         {
             printf("Original data:\n");
-
             Show();
             printf("请输入需要修改的商品的编号:");
         }
     scanf("%d",&mnum);
     for(i=0;i<j;i++)
     {
-        if(mnum==comm[i].num)
+        if(mnum==comm4[i].num)
         {
             tnum=i;
             printf("下面是这个商品的信息:\n");
             printf(NAMEOUT);
-            printf(FORMATOUT,DATA);
+            printf(FORMATOUT,comm4[i].num,comm4[i].name,comm4[i].price,comm4[i].counts,comm4[i].total);
 reinput:printf("请选择需要修改的内容(1.name   2.price   3.count):");
             scanf("%d",&a);
                 switch (a)
                 {
                     case 1:
                         printf("请输入需要修改成的name:");
-                        scanf("%s",comm[i].name);
+                        scanf("%s",comm4[i].name);
                         break;
                     case 2:
                         printf("请输入需要修改的price:");
-                        scanf("%lf",&comm[i].price);
+                        scanf("%lf",&comm4[i].price);
                         break;
                     case 3:
                         printf("请输入需要修改的cout:");
-                        scanf("%lf",&comm[i].counts);
+                        scanf("%lf",&comm4[i].counts);
                         break;
                     default:
                         printf("请输入1-3之间的数字.\n");
@@ -230,6 +240,7 @@ void InsertCommodityInfo()
 }
 void OrderCommodityInfo()
 {
+    struct commodity comm5[50];
     system("cls");
     const char *filename = COMMODITYINFO;
     int i=0,j=0,n=1,m=0,k=0;
@@ -240,7 +251,7 @@ void OrderCommodityInfo()
 		printf("Can not open file\n");
 		exit(1);
 	}
-	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))
+	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm5[i].num,comm5[i].name,&comm5[i].price,&comm5[i].counts,&comm5[i].total))
 	{
 		i++;
 		count=i;
@@ -271,24 +282,24 @@ void OrderCommodityInfo()
                     {
                         for(j=0;j<count-1-k;j++)
                         {
-                            if(comm[j].num>comm[j+1].num)
+                            if(comm5[j].num>comm5[j+1].num)
                             {
-                                int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
+                                int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
 
                             }
                         }
@@ -299,24 +310,24 @@ void OrderCommodityInfo()
                     {
                         for(j=0;j<count-1-k;j++)
                         {
-                            if(comm[j].price>comm[j+1].price)
+                            if(comm5[j].price>comm5[j+1].price)
                             {
-                                int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
-                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                                int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
+                                char s[15];
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                             }
                         }
                     }
@@ -324,23 +335,23 @@ void OrderCommodityInfo()
                 case 3:
                 for(k=0;k<count-1;k++){
                 for(j=0;j<count-1-k;j++){
-                    if(comm[j].counts>comm[j+1].counts){
-                                int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
-                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                    if(comm5[j].counts>comm5[j+1].counts){
+                                 int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
+                                char s[15];
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                     }
                 }
             }
@@ -348,23 +359,23 @@ void OrderCommodityInfo()
         case 4:
             for(k=0;k<count-1;k++){
                 for(j=0;j<count-1-k;j++){
-                    if(comm[j].total>comm[j+1].total){
-                                int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
-                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                    if(comm5[j].total>comm5[j+1].total){
+                                 int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
+                                char s[15];
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                     }
                 }
             }
@@ -380,23 +391,23 @@ void OrderCommodityInfo()
         case 1:
             for(k=0;k<count-1;k++){
                 for(j=0;j<count-1-k;j++){
-                    if(comm[j].num<comm[j+1].num){
-                        int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
+                    if(comm5[j].num<comm5[j+1].num){
+                                 int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                     }
                 }
             }
@@ -404,23 +415,23 @@ void OrderCommodityInfo()
         case 2:
             for(k=0;k<count-1;k++){
                 for(j=0;j<count-1-k;j++){
-                    if(comm[j].price<comm[j+1].price){
-                         int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
+                    if(comm5[j].price<comm5[j+1].price){
+                         int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                     }
                 }
             }
@@ -428,23 +439,23 @@ void OrderCommodityInfo()
         case 3:
             for(k=0;k<count-1;k++){
                 for(j=0;j<count-1-k;j++){
-                    if(comm[j].counts<comm[j+1].counts){
-                                int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
+                    if(comm5[j].counts<comm5[j+1].counts){
+                                int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                     }
                 }
             }
@@ -452,24 +463,24 @@ void OrderCommodityInfo()
         case 4:
             for(k=0;k<count-1;k++){
                 for(j=0;j<count-1-k;j++){
-                    if(comm[j].total<comm[j+1].total)
+                    if(comm5[j].total<comm5[j+1].total)
                     {
-                                int a=comm[j+1].num;
-                                comm[j+1].num=comm[j].num;
-                                comm[j].num=a;
-                                double b=comm[j+1].price;
-                                comm[j+1].price=comm[j].price;
-                                comm[j].price=b;
-                                double c=comm[j+1].counts;
-                                comm[j+1].counts=comm[j].counts;
-                                comm[j].counts=c;
-                                double d=comm[j+1].total;
-                                comm[j+1].total=comm[j].total;
-                                comm[j].total=d;
+                               int a=comm5[j+1].num;
+                                comm5[j+1].num=comm5[j].num;
+                                comm5[j].num=a;
+                                double b=comm5[j+1].price;
+                                comm5[j+1].price=comm5[j].price;
+                                comm5[j].price=b;
+                                double c=comm5[j+1].counts;
+                                comm5[j+1].counts=comm5[j].counts;
+                                comm5[j].counts=c;
+                                double d=comm5[j+1].total;
+                                comm5[j+1].total=comm5[j].total;
+                                comm5[j].total=d;
                                 char s[15];
-                                strcpy(s, comm[j+1].name);
-                                strcpy(comm[j+1].name,comm[j].name);
-                                strcpy(comm[j].name,s);
+                                strcpy(s, comm5[j+1].name);
+                                strcpy(comm5[j+1].name,comm5[j].name);
+                                strcpy(comm5[j].name,s);
                     }
                 }
             }
@@ -484,11 +495,11 @@ void OrderCommodityInfo()
    }
    fp=fopen(filename,"w+");
    for(j=0;j<count;j++){
-     fprintf(fp,"%d\t",comm[j].num);
-     fprintf(fp,"%s\t",comm[j].name);
-     fprintf(fp,"%lf\t",comm[j].price);
-     fprintf(fp,"%lf\t",comm[j].counts);
-     fprintf(fp,"%lf\t\n",comm[j].total);
+     fprintf(fp,"%d\t",comm5[j].num);
+     fprintf(fp,"%s\t",comm5[j].name);
+     fprintf(fp,"%lf\t",comm5[j].price);
+     fprintf(fp,"%lf\t",comm5[j].counts);
+     fprintf(fp,"%lf\t\n",comm5[j].total);
 
    }
 
@@ -496,6 +507,25 @@ void OrderCommodityInfo()
 }
 void Show()
 {
-
+    struct commodity comm7[50];
+    FILE *fp;
+    int i=0,j=3;
+    fp=fopen(COMMODITYINFO,"r+");
+    while(~fscanf(fp,"%d%s%lf%lf%lf",&comm7[i].num,comm7[i].name,&comm7[i].price,&comm7[i].counts,&comm7[i].total))
+	{
+		i++;
+	}
+	j=i;
+	rewind(fp);
+	if(i==0)
+    {
+        printf("There is no record in the file.");
+    }else
+        {
+            printf(NAMEOUT);
+            for(i=0;i<j;i++)
+                printf(FORMATOUT,comm7[i].num,comm7[i].name,comm7[i].price,comm7[i].counts,comm7[i].total);
+        }
+    fclose(fp);
 }
 

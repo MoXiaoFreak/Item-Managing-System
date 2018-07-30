@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1532915724 source:e:\item managing system\main.c
+1532918690 source:e:\item managing system\main.c
 	"head.h"
 	"conponents.h"
 
-1532913326 e:\item managing system\head.h
+1532931684 e:\item managing system\head.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -66,22 +66,22 @@
 1532625965 e:\item managing system\setcolor.h
 	"head.h"
 
-1532913481 e:\item managing system\definitions.h
+1532930538 e:\item managing system\definitions.h
 	"head.h"
 
 1532655633 e:\item managing system\system.h
 	"head.h"
 
-1532915827 e:\item managing system\commodityinfo.h
+1532931740 e:\item managing system\commodityinfo.h
 	"head.h"
 
 1532915761 e:\item managing system\menuregister.h
 	"head.h"
 
-1532917011 e:\item managing system\user.h
+1532918990 e:\item managing system\user.h
 	"head.h"
 
-1532913411 e:\item managing system\search.h
+1532930863 e:\item managing system\search.h
 	"head.h"
 
 1532657238 e:\item managing system\table.h

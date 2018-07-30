@@ -48,6 +48,7 @@ void UserLogin()
 {
     const char *filename =USERINFO;
     int faultcount=0;
+    int usercount=0;
      int count=0,i=0,mark=0;
      char usern[20];
      char pass[20];
@@ -66,16 +67,21 @@ void UserLogin()
         scanf("%s",&usern);
         for(i=0;i<count;i++)
         {
-        	if(strcmp(user[i].username,usern)!=0)
+        	if(strcmp(user[i].username,usern)==0)
         	{
-        		printf("该用户不存在\n");
-        		goto userrepeat2;
+        		mark=i;
+        		break;
         	}
         	else
             {
-                mark=i;
-                break;
+                usercount++;
             }
+            if(usercount==count)
+            {
+                printf("无此用户，请重新输入：\n");
+                goto userrepeat2;
+            }
+
         }
         printf("请输入密码：\n");
         passrepeat2:scanf("%s",&pass);

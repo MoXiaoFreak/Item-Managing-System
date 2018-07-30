@@ -14,7 +14,7 @@ struct users
     char password[20];
 };
 
-struct commodity comm[50];
+
 struct users user[10];
 
  extern int getx=20;//default x position ?

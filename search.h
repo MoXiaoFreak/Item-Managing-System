@@ -1,6 +1,7 @@
 #include "head.h"
 void Search()
     {
+        struct commodity comm6[50];
     printf("商品列表:\n");
     Show();
     FILE *fp;
@@ -13,7 +14,7 @@ void Search()
 		printf("文件不存在\n");
 		exit(1);
 	}
-	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))
+	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm6[i].num,comm6[i].name,&comm6[i].price,&comm6[i].counts,&comm6[i].total))
 	{
 		i++;
 	}
@@ -29,17 +30,17 @@ void Search()
                 scanf("%d",&find_num);
                 for(i=0;i<j;i++)
                 {
-                    if(find_num==comm[i].num)
+                    if(find_num==comm6[i].num)
                     {
                         m=i;
                     }
                 }
                 i=m;
-                if(find_num==comm[m].num)
+                if(find_num==comm6[m].num)
                     {
                         printf("该商品数据如下:\n");
                         printf(NAMEOUT);
-                        printf(FORMATOUT,DATA);
+                        printf(FORMATOUT,comm6[i].num,comm6[i].name,comm6[i].price,comm6[i].counts,comm6[i].total);
                     }else
                     {
                         printf("未查询到该商品....");
@@ -58,23 +59,21 @@ void Search()
                         scanf("%s",find_name);
                         for(i=0;i<j;i++)
                         {
-                              if(strcmp(find_name,comm[i].name)==0)
+                              if(strcmp(find_name,comm6[i].name)==0)
                             {
                                 m=i;
                             }
                         }
                         i=m;
-                        if(strcmp(find_name,comm[i].name)==0)
+                        if(strcmp(find_name,comm6[i].name)==0)
                             {
                                 printf("该商品数据如下:\n");
                                 printf(NAMEOUT);
-                                printf(FORMATOUT,DATA);
+                                printf(FORMATOUT,comm6[i].num,comm6[i].name,comm6[i].price,comm6[i].counts,comm6[i].total);
                             }else
                             {
                                 printf("未查询到该商品....");
-
                             }
-
                         break;
                     case 2:
                         printf("请输入查询数据:");
@@ -82,7 +81,7 @@ void Search()
                         int q[50];
                         for(i=0;i<j;i++)
                         {
-                              if(strstr(comm[i].name,find_name)!= NULL)
+                              if(strstr(comm6[i].name,find_name)!= NULL)
                               {
                                   q[m]=i;
                                   m++;
@@ -94,7 +93,6 @@ void Search()
                             getch();
                             system("cls");
                             return Search();
-
                         }else
                         {
                             printf("该商品数据如下:\n");
@@ -102,11 +100,10 @@ void Search()
                             for(j=0;j<m;j++)
                             {
                                 i=q[j];
-                                printf(FORMATOUT,DATA);
+                                printf(FORMATOUT,comm6[i].num,comm6[i].name,comm6[i].price,comm6[i].counts,comm6[i].total);
 
                             }
                         }
-
                         break;
                     default:
                         printf("请输入正确的选项\n");
