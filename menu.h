@@ -3,6 +3,7 @@ void Menu()
 {
     int i=0,j=0,n;
     system("cls");//清屏
+    //界面
     SetPosition(getx,gety);
     printf("┌-----------------超市管理系统---------------┐");
     SetPosition(getx,gety+13);
@@ -38,6 +39,7 @@ void Menu()
     SetPosition(getx+8,gety+14);
     printf("请输入0-9之间的数字:");
     scanf("%d",&n);
+    //界面
     switch(n)
     {
         case 1:AddCommodityInfo();break;

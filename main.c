@@ -3,7 +3,7 @@
 
 int main()                              //Ö÷º¯Êý
 {
-    Menu();
+    MenuLogin();
     return 0;
 }
 

@@ -1,5 +1,5 @@
 #include "head.h"
-void MenuRegister()
+void MenuLogin()
 {
     int i=0,j=0,n;
     system("cls");
@@ -22,16 +22,16 @@ void MenuRegister()
         printf("|");
     }
     SetPosition(getx+16,gety+5);
-    printf("1.User Login");
+    printf("1.Register");
     SetPosition(getx+16,gety+8);
-    printf("2.exit");
+    printf("2.Login");
     SetPosition(getx,gety+16);
     printf("please choose:");
     scanf("%d",&n);
-    switch(n)
+    switch(n)//´ýÐÞ¸Ä
     {
-        case 1:UserLogin();break;
-        case 2:exit(0);break;
+        case 1:UserRegister();break;
+        case 2:UserLogin();break;
         default:system("pause");
     }
     return Menu();

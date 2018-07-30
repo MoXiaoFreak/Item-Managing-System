@@ -13,6 +13,7 @@
 #define DATA comm[i].num,comm[i].name,comm[i].price,comm[i].counts,comm[i].total
 #define NAMEOUT "num             name            price           count           total\n"
 #define COMMODITYINFO "d:\\commodity.txt"
+#define USERINFO "d:\\userinfo.txt"
 
 
 #endif

@@ -8,8 +8,10 @@ void AddCommodityInfo()
     FILE *fp;
 	if((fp=fopen(filename,"r+"))==NULL)			// 打开文件并且让fp指向 文件
 	{
-		printf("Can not open file\n");
-		exit(1);
+	    FILE *fp=fopen(filename,"w+");
+		printf("文件不存在，已新建该文件。\n");
+		system("pause");
+		return Menu();
 	}
 	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
 	{
@@ -70,8 +72,9 @@ void DelCommodityInfo()
     FILE *fp;
 	if((fp=fopen(filename,"r"))==NULL)			// 打开文件并且让fp指向 文件
 	{
-		printf("Can not open file\n");
-		exit(1);
+		printf("文件不存在。\n");
+		system("pause");
+		return Menu();
 	}
 	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
 	{
@@ -495,3 +498,4 @@ void Show()
 {
 
 }
+

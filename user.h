@@ -1,234 +1,91 @@
 #include "head.h"
-//需要重写，计划按照Commodity修改
-/*
 void UserRegister()
 {
-    FILE *fp;
-    char temp[20];        //定义数组存放键盘输入的用户名和密码
-a:     printf("\n用户注册\n");
-        printf("用户名:");
-        scanf("%s",user[0].username);
-
-        fp=fopen(user[0].username,"r");
-        if(fp!=NULL)
+    const char *filename =USERINFO;
+     int count=0,i=0;
+     char pass[20];
+     FILE *fp;
+	a:if((fp=fopen(filename,"r+"))==NULL)
+	{
+	    FILE *fp=fopen(filename,"w+");
+	    fclose(fp);
+		goto a;
+	}
+	while(~fscanf(fp,"%s%s",&user[i].username,&user[i].password))
+	{
+		i++;
+		count=i;
+	}
+	printf("当前共%d个注册用户\n",count);
+	userrepeat:printf("请输入注册用户名：\n");
+        scanf("%s",&user[count+1].username);
+        for(i=0;i<count+1;i++)
         {
-           printf("\n\t该用户名已存在");
-           fclose(fp);
-           printf("\n\t继续注册?(Y/N)");
-           if(getch()=='Y')
-                return UserRegister();
-           else
-                return UserLogin();
+        	if(strcmp(user[i].username,user[count+1].username)==0)
+        	{
+        		printf("该用户名已存在，请重新输入。\n");
+        		goto userrepeat;
+        	}
         }
-
-        printf("\n密  码:");
-        scanf("%s",user[0].password);
-        printf("\n确认密码:");
-        scanf("%s",temp);
-        if(strcmp(user[0].password,temp)!=0)
-        printf("\n两次密码不一致,请重新输入");
-    if(strcmp(user[0].password,temp)!=0)
-        goto a;
-
-    fp=fopen(user[0].username,"w");
-    if(fp==NULL)
-       {
-          printf("\n注册失败\n");
-          exit(0);
-       }
-    else
-    {
-        system("cls");
-        printf("\n注册成功\n");
-        judge=0;
-        UserLogin();             //这里跳转到登陆模块
-    }
-
-
+        fprintf(fp,"%s\t",user[count+1].username);
+       passrepeat:printf("请输入注册密码：\n");
+        scanf("%s",&user[count+1].password);
+        printf("请确认注册密码：\n");
+        scanf("%s",&pass);
+        if(strcmp(user[count+1].password,pass)!=0)
+        {
+            printf("密码不匹配，请重新设定密码：\n");
+            goto passrepeat;
+        }
+        fprintf(fp,"%s\t\n",user[count+1].password);
+        fclose(fp);
+        count++;
+        printf("注册成功！");
+        system("pause");
+        return MenuLogin();
 }
-
 void UserLogin()
 {
-
-    FILE *fp;
-    char u[20],c[20],temp;      //定义两个数组，存放键盘输入的用户名和密码
-    printf("\n用户登录");
-    printf("\n用户名:");
-    scanf("%s",u);
-    fp=fopen(u,"r+");
-    temp='0';
-    if(fp==NULL)
-    {
-        printf("\n用户不存在,请注册");
-        printf("\n1.注册   2.重新登陆");
-        temp=getch();
-        if(temp=='1')
+    const char *filename =USERINFO;
+    int faultcount=0;
+     int count=0,i=0,mark=0;
+     char usern[20];
+     char pass[20];
+     FILE *fp;
+	if((fp=fopen(filename,"r+"))==NULL)
+	{
+	  printf("无用户注册记录，跳转到用户注册......\n");
+	  return UserRegister();
+	}
+	while(~fscanf(fp,"%s%s",&user[i].username,&user[i].password))
+	{
+		i++;
+		count=i;
+	}
+	userrepeat2:printf("请输入用户名：\n");
+        scanf("%s",&usern);
+        for(i=0;i<count;i++)
         {
-            system("cls");
-            UserRegister();
-        }
-        else return UserLogin();
-    }
-    do
-    {
-        if(judge==1) fread(&user[0],sizeof(user[0]),1,fp); //读取用户信息，即用户名和密码
-        printf("\n密  码:");
-        scanf("%s",c);
-        if(strcmp(user[0].password,c)!=0)                      //对比输入的密码和读取的密码
-        {
-            printf("\n密码错误(1.退出 2.重新输入)");
-            temp=getch();
-            printf("\n");
-            if(temp=='1')
+        	if(strcmp(user[i].username,usern)!=0)
+        	{
+        		printf("该用户不存在\n");
+        		goto userrepeat2;
+        	}
+        	else
             {
-                fclose(fp);
-                break;                       //关闭文件防止错误操作
-            }
-        }
-    }while(temp=='2');
-    return Menu();
-}
-*/
-
-void ReadData()
-{
-    int total=GetPrivateProfileInt("INFO","count",0,"e:\\Info.ini");
-    int i;
-    char t[5]={"\0"};
-    for(i=0;i<total;i++)
-    {
-        sprintf(t,"%d",i+1);
-        GetPrivateProfileString(t,"USERNAME","",user[i].username,20,"e:\\Info.ini");
-        GetPrivateProfileString(t,"PASSWORD","",user[i].password,20,"e:\\Info.ini");
-    }
-}
-
-void UserLogin()
-{
-    int p,i=0,count=0,f_u=0,f_p=0,total=0;
-    char username[20]={"\0"};
-    char password[20]={"\0"};
-    while(1)
-    {
-        f_u=0;
-        f_p=0;
-        system("cls");
-        printf("当前共有%d个注册用户",total);
-        printf("\n\n请输入用户名：");
-        memset(username,'\0',20);
-        scanf("%s",&username);
-        printf("\n请输入密码：");
-        memset(password,'\0',20);
-        i=0;
-        while(1)
-        {
-            p=_getch();
-            if(p==10 || p==13)
-            {
+                mark=i;
                 break;
             }
-            password[i++]=p;
-            printf("*");
         }
-        for(i=0;i<total;i++)
+        printf("请输入密码：\n");
+        passrepeat2:scanf("%s",&pass);
+        if(strcmp(user[mark].password,pass)!=0)
         {
-            if(strcmp(user[i].username,username)==0)
-            {
-                f_u=1;
-                if(strcmp(user[i].password,password)==0)
-                {
-                    f_p=1;
-                    printf("\n\n欢迎 %s",username);
-                    fflush(stdin);
-                    _getche();
-                    continue;
-                }
-            }
+            printf("密码输入错误，请重新输入：\n");
+            goto passrepeat2;
         }
-        if(f_u==0)
-        {
-            printf("\n\n不存在该用户名！ 选 1 重新输入，选 2 注册新用户:\n");
-            char c;
-            fflush(stdin);
-            c=getchar();
-            if(c=='1')
-            {
-                continue;
-            }
-            else if(c=='2')
-            {
-                system("cls");
-                printf("注册新用户");
-                printf("\n\n\n请输入用户名：");
-                memset(username,'\0',20);
-                scanf("%s",&username);
-                printf("\n请输入密码：");
-                char temp[20]={"\0"} ;
-                i=0;
-                while(1)
-                {
-                    p=_getch();
-                    if(p==10 || p==13)
-                    {
-                        break;
-                    }
-                    i++;
-                    temp[i]=p;
-                    printf("*");
-                }
-                printf("\n请再次输入密码：");
-                i=0;
-                memset(password,'\0',20);
-                while(1)
-                {
-                    p=_getch();
-                    if(p==10 || p==13)
-                    {
-                        break;
-                    }
-                    i++;
-                    password[i]=p;
-                    printf("*");
-                }
-                if(strcmp(temp,password)==0)
-                {
-                    total++;
-                    char t[5]={"\0"};
-                    sprintf(t,"%d",total);
-                    WritePrivateProfileString("INFO","count",t,"e:\\Info.ini");
-                    WritePrivateProfileString(t,"USERNAME",username,"e:\\Info.ini");
-                    WritePrivateProfileString(t,"PASSWORD",password,"e:\\Info.ini");
-                    printf("\n\n注册成功，请重新登录");
-                    fflush(stdin);
-                    _getch();
-                    count=0;
-                   ReadData();
-                    continue;
-                }
-                else
-                {
-                    printf("\n\n两次密码不一致，注册失败");
-                    fflush(stdin);
-                    _getch();
-                    count=0;
-                    continue;
-                }
-            }
-        }
-        else if(f_p==0)
-        {
-            count++;
-            if(count>=3)
-            {
-                printf("\n\n连续输入3次错误，程序将退出");
-                fflush(stdin);
-                _getche();
-                exit(0);
-            }
-            printf("\n\n密码输入错误，请重新输入");
-            fflush(stdin);
-            _getche();
-        }
-    }
-    return ;
+        printf("登录成功！");
+        fclose(fp);
+        system("pause");
+        return Menu();
 }

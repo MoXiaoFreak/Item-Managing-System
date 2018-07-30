@@ -10,7 +10,7 @@ void Search()
     const char *filename = COMMODITYINFO;
 	if((fp=fopen(filename,"r+"))==NULL)
 	{
-		printf("Can not open file\n");
+		printf("文件不存在\n");
 		exit(1);
 	}
 	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm[i].num,comm[i].name,&comm[i].price,&comm[i].counts,&comm[i].total))

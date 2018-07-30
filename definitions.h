@@ -17,7 +17,8 @@ struct users
 struct commodity comm[50];
 struct users user[10];
 
- extern int getx=20;//default x position
- extern int gety=10;//default y position
+ extern int getx=20;//default x position ?
+ extern int gety=10;//default y position ?
+
 int judge=1;
 
