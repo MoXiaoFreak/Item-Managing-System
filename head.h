@@ -9,10 +9,10 @@
 #include <dos.h>
 #include "definitions.h"
 
-#define FORMATOUT "%-15d  %-15s  %-15.11f  %-15.11f  %-15.11f \n"
-#define NAMEOUT "num             name            price           count           total\n"
+#define FORMATOUT "%-15d  %-15s  %-15.2lf  %-15.2lf  %-15.2lf \n"
+#define NAMEOUT "num               name              price            count             total\n"
 #define COMMODITYINFO "d:\\commodity.txt"
 #define USERINFO "d:\\userinfo.txt"
-
+#define SetXY SetPosition
 
 #endif

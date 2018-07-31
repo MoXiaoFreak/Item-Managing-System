@@ -1,4 +1,3 @@
-//ÏµÍ³²Ù×÷
 #include "head.h"
 void SetPosition(int x, int y)
 {

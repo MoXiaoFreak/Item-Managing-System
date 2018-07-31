@@ -41,7 +41,7 @@ void UserRegister()
         fclose(fp);
         count++;
         printf("注册成功！");
-        system("pause");
+        getch();
         return MenuLogin();
 }
 void UserLogin()
@@ -88,10 +88,17 @@ void UserLogin()
         if(strcmp(user[mark].password,pass)!=0)
         {
             printf("密码输入错误，请重新输入：\n");
+            faultcount++;
+            if(faultcount==3)
+            {
+                printf("登录失败");
+                getch();
+                return MenuLogin();
+            }
             goto passrepeat2;
         }
         printf("登录成功！");
         fclose(fp);
-        system("pause");
+        getch();
         return Menu();
 }

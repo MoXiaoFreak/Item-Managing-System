@@ -1,7 +1,9 @@
 #include "head.h"
+
 void Search()
     {
         struct commodity comm6[50];
+        system("cls");
     printf("商品列表:\n");
     Show();
     FILE *fp;

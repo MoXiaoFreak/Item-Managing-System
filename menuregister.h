@@ -4,7 +4,7 @@ void MenuLogin()
     int i=0,j=0,n;
     system("cls");
     SetPosition(getx,gety);
-    printf("©°--------------------µÇÂ¼-------------------©´");
+    printf("©°--------------------µÇÂ¼---------------------©´");
     SetPosition(getx,gety+13);
     printf("©¸");
     SetPosition(getx+46,gety+13);
@@ -17,9 +17,9 @@ void MenuLogin()
     for(j=1;j<13;j++)
     {
        SetPosition(getx,gety+j);
-        printf("|");
+        printf("¨U");
         SetPosition(getx+46,gety+j);
-        printf("|");
+        printf("¨U");
     }
     SetPosition(getx+16,gety+5);
     printf("1.Register");
