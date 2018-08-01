@@ -52,9 +52,9 @@ void Menu()
         case 4:OrderCommodityInfo();break;
         case 5:TotalCommodityInfo();break;
         case 6:ModifyCommodityInfo();break;
-        case 8:return MenuLogin();break;
         case 7:InsertCommodityInfo();break;
+        case 8:return MenuLogin();break;
         case 0:exit(0);
-        default:printf("ERROR");exit(0);
+        default:printf("ERROR");getch();return Menu();
     }
 }

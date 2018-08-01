@@ -122,6 +122,7 @@ void Search()
             }
             printf("输入任意键继续....\n");
             getch();
+            system("cls");
 			printf("是否继续查询商品：输入'1'为是，其他为否:\n");
             scanf("%d",&b);
 			if(b==1)

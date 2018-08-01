@@ -21,10 +21,12 @@ void MenuLogin()
         SetPosition(getx+46,gety+j);
         printf("║");
     }
-    SetPosition(getx+16,gety+5);
-    printf("1.Register");
-    SetPosition(getx+16,gety+8);
-    printf("2.Login");
+    SetPosition(getx+18,gety+5);
+    printf("1.新用户注册");
+    SetPosition(getx+18,gety+7);
+    printf("2.用户登录");
+     SetPosition(getx+18,gety+9);
+    printf("0.退出程序");
     SetPosition(getx,gety+16);
     printf("please choose:");
     scanf("%d",&n);
@@ -32,7 +34,8 @@ void MenuLogin()
     {
         case 1:UserRegister();break;
         case 2:UserLogin();break;
-        default:system("pause");
+        case 0:exit(0);
+        default:printf("输入错误");exit(0);
     }
     return Menu();
     // UserRegister()

@@ -15,10 +15,10 @@ struct users
 };
 
 
-struct users user[10];
+struct users user[20];
 
  extern int getx=20;//default x position ?
- extern int gety=10;//default y position ?
+ extern int gety=5;//default y position ?
 
 int judge=1;
 

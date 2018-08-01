@@ -5,7 +5,7 @@ void AddCommodityInfo()
   const char *filename = COMMODITYINFO;
   int count=0;
     char b='1';
-    int i=0;
+    int i,n;
     FILE *fp;
 	repeat1:if((fp=fopen(filename,"r+"))==NULL)
 	{
@@ -14,6 +14,7 @@ void AddCommodityInfo()
 		getch();
 		return Menu();
 	}
+	 i=0;
 	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm1[i].num,comm1[i].name,&comm1[i].price,&comm1[i].counts,&comm1[i].total))
 	{
 		i++;
@@ -21,16 +22,16 @@ void AddCommodityInfo()
 	}
     while(b=='1')
 	{
-	    system("cls");
+	   number: system("cls");
 	    Show();
         printf("请输入添加商品的信息：\n");
         printf("商品编号：");
-        scanf("%d",&comm1[count+1].num);
-         if(comm1[count+1].num<1)
-        	{
+        n=scanf("%d",&comm1[count+1].num);
+        if(n==0)
+            {
         		printf("商品编号不符合要求，请重新输入。\n");
         		getch();
-				goto repeat1;
+				goto number;
 			}
         for(i=0;i<count+1;i++)
         {
@@ -68,11 +69,11 @@ void AddCommodityInfo()
         printf("商品总价：");
         scanf("%lf",&comm1[count+1].total);
         fprintf(fp,"%lf\t\n",comm1[count+1].total);
+         fclose(fp);
         count=count+1;
         system("cls");
         printf("录入成功！\n");
         getch();
-        fclose(fp);
         system("cls");
         Show();
         printf("是否继续录入商品：输入'1'为是，其他为否:\n");
@@ -89,20 +90,22 @@ void DelCommodityInfo()
 	const char *filename = COMMODITYINFO;
     int delnum,x,y=0,cho,rdel;
     int count=0;
-    int i=0,j;
+    int i,j;
     FILE *fp;
-	repeat1: if((fp=fopen(filename,"r"))==NULL)			// 打开文件并且让fp指向 文件
+	repeat1: if((fp=fopen(filename,"r+"))==NULL)			// 打开文件并且让fp指向 文件
 	{
 		printf("文件不存在。\n");
 		system("pause");
 		return Menu();
 	}
+	i=0;
 	while(~fscanf(fp,"%d%s%lf%lf%lf",&comm2[i].num,comm2[i].name,&comm2[i].price,&comm2[i].counts,&comm2[i].total))//读取一组数据后指针指向下一组数据，并且判断是否指向最后一行
 	{
 		i++;
 		count=i;
 	}
-	system("cls");
+        fclose(fp);
+        system("cls");
         Show();
         printf("请输入你想要删除的商品编号：\n");
         scanf("%d",&delnum);
@@ -121,9 +124,9 @@ void DelCommodityInfo()
 		}
     system("cls");
     Show();
-	printf("您所要删除商品的信息：\t编号\t|名称\t|价格\t\t|数量\t\t|总价\n");
-	printf("                      \t %d \t| %s \t| %lf\t| %lf\t| %lf\n",comm2[cho].num,comm2[cho].name,comm2[cho].price,comm2[cho].counts,comm2[cho].total);
-	printf("确定要删除吗？(输入1为是，其他为否：)");
+	printf("您所要删除商品的信息：\n\t编号\t|名称\t|价格\t\t|数量\t\t|总价\n");
+	printf("\t %d \t| %s \t| %lf\t| %lf\t| %lf\n",comm2[cho].num,comm2[cho].name,comm2[cho].price,comm2[cho].counts,comm2[cho].total);
+	printf("确定要删除吗？(输入1为是，其他为否：)\n");
 	scanf("%d",&x);
 	if(x==1)
 	{
@@ -132,16 +135,20 @@ void DelCommodityInfo()
 			comm2[j]=comm2[j+1];
 			fclose(fp);
 		}
-		fp=fopen(filename,"r+");
+		fp=fopen(filename,"w+");
 		for(j=0;j<count-1;j++)
 		{
 			fprintf(fp,"%d\t%s\t%lf\t%lf\t%lf\t\n",comm2[j].num,comm2[j].name,comm2[j].price,comm2[j].counts,comm2[j].total);
 		}
 		printf("删除成功。\n");
 		count--;
-
 	}else
-        printf("退出");
+	{
+	     printf("退出");
+	     getch();
+	     fclose(fp);
+	     return Menu();
+	}
         fclose(fp);
         system("cls");
         Show();
@@ -152,7 +159,7 @@ void DelCommodityInfo()
             if (count==0)
             {
                 printf("无商品信息,返回主菜单\n");
-                system("pause");
+                getch();
                 return Menu();
             }
             else goto repeat1;
@@ -189,7 +196,7 @@ void TotalCommodityInfo()
         sumtotal=sumtotal+comm3[j].total;
     }
     system("cls");
-    printf("共%d种商品  总数量%6.lf件  总价%6.lf元\n\n",sumnum,sumcounts,sumtotal);
+    printf("共%d种商品  总数量%15.lf件  总价%15.lf元\n\n",sumnum,sumcounts,sumtotal);
     system("pause");
     return Menu();
 }

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1533023895 source:e:\item managing system\main.c
+1533023987 source:e:\item managing system\main.c
 	"head.h"
 	"conponents.h"
 
@@ -54,7 +54,7 @@
 	"search.h"
 	"table.h"
 
-1533006762 e:\item managing system\menu.h
+1533090615 e:\item managing system\menu.h
 	"head.h"
 
 1532625845 e:\item managing system\setposition.h
@@ -66,22 +66,22 @@
 1532625965 e:\item managing system\setcolor.h
 	"head.h"
 
-1532930538 e:\item managing system\definitions.h
+1533086041 e:\item managing system\definitions.h
 	"head.h"
 
 1533004547 e:\item managing system\system.h
 	"head.h"
 
-1533018584 e:\item managing system\commodityinfo.h
+1533091219 e:\item managing system\commodityinfo.h
 	"head.h"
 
-1532935209 e:\item managing system\menuregister.h
+1533091323 e:\item managing system\menuregister.h
 	"head.h"
 
 1533005711 e:\item managing system\user.h
 	"head.h"
 
-1533006690 e:\item managing system\search.h
+1533086344 e:\item managing system\search.h
 	"head.h"
 
 1533005888 e:\item managing system\table.h
