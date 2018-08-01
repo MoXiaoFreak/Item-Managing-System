@@ -39,6 +39,8 @@ void Menu()
      SetPosition(getx+16,gety+9);
     printf("8.注销\n");
     SetPosition(getx+16,gety+10);
+    printf("9.显示所有商品信息\n");
+    SetPosition(getx+16,gety+11);
     printf("0.退出\n");
     SetPosition(getx+8,gety+14);
     printf("请输入0-9之间的数字:");
@@ -54,6 +56,7 @@ void Menu()
         case 6:ModifyCommodityInfo();break;
         case 7:InsertCommodityInfo();break;
         case 8:return MenuLogin();break;
+        case 9:system("cls");Show();getch();return Menu();
         case 0:exit(0);
         default:printf("ERROR");getch();return Menu();
     }
