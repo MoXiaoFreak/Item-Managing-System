@@ -40,7 +40,6 @@
 		</Unit>
 		<Unit filename="menu.h" />
 		<Unit filename="menuregister.h" />
-		<Unit filename="screenshow.h" />
 		<Unit filename="search.h" />
 		<Unit filename="system.h" />
 		<Unit filename="table.h" />

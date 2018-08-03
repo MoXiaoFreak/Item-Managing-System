@@ -4,10 +4,13 @@ void AddCommodityInfo()
     struct commodity comm1[50];
   const char *filename = COMMODITYINFO;
   int count=0;
-    char b='1';
+    int b=1;
     int i,n;
     FILE *fp;
-	repeat1:if((fp=fopen(filename,"r+"))==NULL)
+	repeat1:
+    while(b==1)
+	{
+	    if((fp=fopen(filename,"r+"))==NULL)
 	{
 	    FILE *fp=fopen(filename,"w+");
 		printf("文件不存在，已新建该文件。\n");
@@ -20,8 +23,6 @@ void AddCommodityInfo()
 		i++;
 		count=i;
 	}
-    while(b=='1')
-	{
 	   number: system("cls");
 	    Show();
         printf("请输入添加商品的信息：\n");
@@ -29,6 +30,7 @@ void AddCommodityInfo()
         if( n=scanf("%d",&comm1[count+1].num)==0)
             {
         		printf("商品编号不符合要求，请重新输入。\n");
+        		fflush(stdin);
         		getch();
 				goto number;
 			}
@@ -44,7 +46,6 @@ void AddCommodityInfo()
         		goto repeat1;
         	}
         }
-        fprintf(fp,"%d\t",comm1[count+1].num);
         printf("商品名称：");
         scanf("%s",comm1[count+1].name);
         for(i=0;i<count+1;i++)
@@ -55,9 +56,11 @@ void AddCommodityInfo()
         	    system("cls");
                 Show();
         		printf("商品名称已经存在，请重新输入。\n");
+        		getch();
         		goto repeat1;
         	}
         }
+        fprintf(fp,"%d\t",comm1[count+1].num);
         fprintf(fp,"%s\t",comm1[count+1].name);
         printf("商品价格：");
         scanf("%lf",&comm1[count+1].price);
@@ -65,9 +68,7 @@ void AddCommodityInfo()
         printf("商品库存：");
         scanf("%lf",&comm1[count+1].counts);
         fprintf(fp,"%lf\t",comm1[count+1].counts);
-        printf("商品总价：");
-        scanf("%lf",&comm1[count+1].total);
-        fprintf(fp,"%lf\t\n",comm1[count+1].total);
+        fprintf(fp,"%lf\t\n",comm1[count+1].counts*comm1[count+1].price);
          fclose(fp);
         count=count+1;
         system("cls");
@@ -76,10 +77,10 @@ void AddCommodityInfo()
         system("cls");
         Show();
         printf("是否继续录入商品：输入'1'为是，其他为否:\n");
-        fflush(stdin);
-        scanf("%c",&b);
-        if(b!='1')
-                goto repeat1;
+//        fflush(stdin);
+        scanf("%d",&b);
+        if(b!=1)
+                break;
     }
  return Menu();
 }
@@ -89,12 +90,12 @@ void DelCommodityInfo()
 	const char *filename = COMMODITYINFO;
     int delnum,x,y=0,cho,rdel;
     int count=0;
-    int i,j;
+    int i,j,n;
     FILE *fp;
-	repeat1: if((fp=fopen(filename,"r+"))==NULL)			// 打开文件并且让fp指向 文件
+	repeatc: if((fp=fopen(filename,"r+"))==NULL)			// 打开文件并且让fp指向 文件
 	{
 		printf("文件不存在。\n");
-		system("pause");
+		getch();
 		return Menu();
 	}
 	i=0;
@@ -104,10 +105,16 @@ void DelCommodityInfo()
 		count=i;
 	}
         fclose(fp);
-        system("cls");
+       repeatdel: system("cls");
         Show();
-        printf("请输入你想要删除的商品编号：\n");
-        scanf("%d",&delnum);
+       printf("请输入你想要删除的商品编号：\n");
+        if(n=scanf("%d",&delnum)<1)
+        {
+            printf("输入错误");
+            fflush(stdin);
+            getch();
+            goto repeatdel;
+        }
 		for(i=0;i<count;i++)
 		{
 			if(delnum==comm2[i].num)
@@ -119,7 +126,7 @@ void DelCommodityInfo()
 		if(y!=1)
 		{
 			printf("您输入的商品编号不存在。\n");
-			goto repeat1;
+			goto repeatc;
 		}
     system("cls");
     Show();
@@ -161,7 +168,7 @@ void DelCommodityInfo()
                 getch();
                 return Menu();
             }
-            else goto repeat1;
+            else goto repeatc;
         }
         else
         {
@@ -204,7 +211,7 @@ void ModifyCommodityInfo()
     struct commodity comm8[50];
     FILE *fp;
     FILE *fp1;
-    int i=0,j,mnum,a,tnum,m,k;
+    int i=0,j,mnum,a,tnum,m,k,n;
     const char *filename = COMMODITYINFO;
 	if((fp=fopen(filename,"r+"))==NULL)
 	{
@@ -223,12 +230,18 @@ void ModifyCommodityInfo()
         printf("There is no record in the file.");
     }else
         {
-            system("cls");
+      repeatmodify:       system("cls");
             Show();
             fclose(fp);
             printf("请输入需要修改的商品的编号:");
         }
-    scanf("%d",&mnum);
+     if(n=scanf("%d",&mnum)<1)
+        {
+            printf("输入错误");
+            fflush(stdin);
+            getch();
+            goto repeatmodify;
+        }
     for(i=0;i<j;i++)
     {
         if(mnum==comm8[i].num)
@@ -334,12 +347,21 @@ void InsertCommodityInfo()
                     }
                 }
             }
+   fp=fopen(filename,"w+");
+   for(j=0;j<count;j++){
+     fprintf(fp,"%d\t",comma[j].num);
+     fprintf(fp,"%s\t",comma[j].name);
+     fprintf(fp,"%lf\t",comma[j].price);
+     fprintf(fp,"%lf\t",comma[j].counts);
+     fprintf(fp,"%lf\t\n",comma[j].total);
+   }
+   fclose(fp);
    while(a=='1'){
 
     system("cls");
 
     SetPosition(getx,gety);
-    printf("+---------------------欢迎来到插入功能--------------------+");
+    printf("+---------------------欢迎进入插入功能--------------------+");
 
     SetPosition(getx,gety+1);
     printf("退出请输入0，任意键继续\n");
@@ -348,9 +370,7 @@ void InsertCommodityInfo()
     if(b=='0'){
     return Menu();
     }
-     printf("________________________________________________________________________________________________________________________\n");
     n=Show();
-    printf("________________________________________________________________________________________________________________________\n");
     if(n==0){
     printf("文件为空，请返回menu添加");
     getch();
@@ -358,14 +378,13 @@ void InsertCommodityInfo()
     }
    struct commodity comm9;
    repeat4: printf("请输入在几号商品处插入:");
+
         n=scanf("%d",&insert_num);
         if(n==0)
             {
         		printf("商品编号不符合要求，请重新输入。\n");
-        		getch();
 				goto repeat4;
 			}
-
 		for(i=0;i<count;i++)
 		{
 			if(insert_num==comma[i].num)
@@ -400,12 +419,24 @@ void InsertCommodityInfo()
         	  }
           }
         strcpy(comma[cho].name,comm9.name);
-        printf("商品价格：");
-        scanf("%lf",&comma[cho].price);
-        printf("商品库存：");
-        scanf("%lf",&comma[cho].counts);
-        printf("商品总价：");
-        scanf("%lf",&comma[cho].total);
+        repeat5: printf("商品价格：");
+        fflush(stdin);
+        n=scanf("%lf",&comma[cho].price);
+        if(n==0)
+            {
+        		printf("商品价格不符合要求，请重新输入。\n");
+				goto repeat5;
+			}
+        repeat6: printf("商品库存：");
+        fflush(stdin);
+        n=scanf("%lf",&comma[cho].counts);
+        if(n==0)
+            {
+        		printf("商品库存不符合要求，请重新输入。\n");
+				goto repeat6;
+			}
+
+        comma[cho].total=comma[cho].price*comma[cho].counts;
         printf("插入成功！\n");
         count++;
     }
@@ -427,12 +458,29 @@ void InsertCommodityInfo()
         	  }
           }
         strcpy(comma[cho+1].name,comm9.name);
-        printf("商品价格：");
-        scanf("%lf",&comma[cho+1].price);
-        printf("商品库存：");
-        scanf("%lf",&comma[cho+1].counts);
-        printf("商品总价：");
-        scanf("%lf",&comma[cho+1].total);
+
+        repeat7: printf("商品价格：");
+        fflush(stdin);
+        n=scanf("%lf",&comma[cho+1].price);
+        if(n==0)
+            {
+        		printf("商品价格不符合要求，请重新输入。\n");
+        		fflush(stdin);
+				goto repeat7;
+			}
+
+        repeat8: printf("商品库存：");
+        fflush(stdin);
+        n=scanf("%lf",&comma[cho+1].counts);
+        if(n==0)
+            {
+        		printf("商品库存不符合要求，请重新输入。\n");
+        		fflush(stdin);
+        		getch();
+				goto repeat8;
+			}
+
+        comma[cho+1].total=comma[cho+1].price*comma[cho+1].counts;
         printf("插入成功！\n");
         count++;
     }
@@ -450,20 +498,20 @@ void InsertCommodityInfo()
    }
    fclose(fp);
    system("cls");
-    printf("________________________________________________________________________________________________________________________\n");
    Show();
-    printf("________________________________________________________________________________________________________________________\n");
    fflush(stdin);
    printf("继续插入请输入“1”,任意键返回menu:\n");
    scanf("%c",&a);
  }
  return Menu();
 }
+
 void OrderCommodityInfo()
 {
     struct commodity comm5[50];
     system("cls");
     const char *filename = COMMODITYINFO;
+    char a='1';
     int i=0,j=0,n=1,m=0,k=0;
     int count=0;
     FILE *fp;
@@ -478,11 +526,22 @@ void OrderCommodityInfo()
 		count=i;
 	}
 	 fclose(fp);
-    while(n)
+    while(a=='1')
     {
     system("cls");
-	Show();
-	printf("排序依据:\n");
+    char b;
+    SetPosition(getx,gety);
+    printf("+---------------------欢迎进入排序功能--------------------+");
+
+    SetPosition(getx,gety+1);
+    printf("退出请输入0，任意键继续\n");
+    fflush(stdin);
+    scanf("%c",&b);
+    if(b=='0'){
+    return Menu();
+    }
+    Show();
+    printf("排序依据:\n");
 	printf("1.按序号\n");
 	printf("2.按单价\n");
 	printf("3.按数量\n");
@@ -717,7 +776,7 @@ void OrderCommodityInfo()
    else{
     printf("输入错误");
    }
-   fp=fopen(filename,"r+");
+   fp=fopen(filename,"w+");
    for(j=0;j<count;j++)
     {
      fprintf(fp,"%d\t",comm5[j].num);
@@ -727,31 +786,48 @@ void OrderCommodityInfo()
      fprintf(fp,"%lf\t\n",comm5[j].total);
    }
    fclose(fp);
+   Show();
+   fflush(stdin);
+   printf("继续排序请输入“1”,任意键返回menu:\n");
+   scanf("%c",&a);
  }
+ return Menu();
 }
 int Show()
 {
-    struct commodity comm7[50];
-    FILE *fp;
-    int i=0,j=3;
-    fp=fopen(COMMODITYINFO,"r+");
-    while(~fscanf(fp,"%d%s%lf%lf%lf",&comm7[i].num,comm7[i].name,&comm7[i].price,&comm7[i].counts,&comm7[i].total))
-	{
-		i++;
-	}
-	j=i;
-	rewind(fp);
-	if(i==0)
-    {
-        printf("There is no record in the file.");
-        return 0;
-    }else
-        {
-            printf(NAMEOUT);
-            for(i=0;i<j;i++)
-                printf(FORMATOUT,comm7[i].num,comm7[i].name,comm7[i].price,comm7[i].counts,comm7[i].total);
-        }
-    fclose(fp);
-    return 1;
+system("cls");
+            SetPosition(5,3);
+              struct commodity comm7[50];
+            FILE *fp;
+            int i=0,j=3;
+            fp=fopen(COMMODITYINFO,"r+");
+            while(~fscanf(fp,"%d%s%lf%lf%lf",&comm7[i].num,comm7[i].name,&comm7[i].price,&comm7[i].counts,&comm7[i].total))
+            {
+                i++;
+            }
+            j=i;
+            DrawTable(j,5);
+            rewind(fp);
+
+            if(i==0)
+            {
+                SetPosition(10,15);
+                printf("There is no record in the file.");
+                return 0;
+            }else
+                {
+                    SetPosition(7,3);
+                    printf(NAMEOUT);
+
+                    for(i=0;i<j;i++)
+                    {
+                        printf("\n");
+                        SetPosition(7,2*i+5);
+                        printf(FORMATOUT,comm7[i].num,comm7[i].name,comm7[i].price,comm7[i].counts,comm7[i].total);
+                    }
+                }
+            fclose(fp);
+            printf("\n\n");
+            return 1;
 }
 

@@ -38,7 +38,6 @@ void UserRegister()
         		goto userrepeat;
         	}
         }
-        fprintf(fp,"%s\t",user[count+1].username);
        passrepeat:
            SetPosition(getx+15,gety+7);
            printf("请输入注册密码：\n");
@@ -58,6 +57,7 @@ void UserRegister()
             system("cls");
             goto userrepeat;
         }
+        fprintf(fp,"%s\t",user[count+1].username);
         fprintf(fp,"%s\t\n",user[count+1].password);
         fclose(fp);
         count++;
@@ -79,7 +79,7 @@ void UserLogin()
 	if((fp=fopen(filename,"r+"))==NULL)
 	{
         printf("无用户注册记录，跳转到用户注册......\n");
-	  return UserRegister();
+        return UserRegister();
 	}
 	while(~fscanf(fp,"%s%s",&user[i].username,&user[i].password))
 	{
@@ -108,11 +108,10 @@ void UserLogin()
             if(usercount==count)
             {
                 SetPosition(getx+15,gety+15);
-                printf("无此用户,按任意键重新输入...\n");
+                printf("无此用户,按任意键返回登录界面\n");
                 getch();
                 system("cls");
-                DrawLogin();
-                goto userrepeat2;
+                return MenuLogin();
             }
 
         }

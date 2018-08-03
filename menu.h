@@ -3,6 +3,20 @@ void Menu()
 {
     int i=0,j=0,n;
     system("cls");//清屏
+        SetPosition(0,6);
+    printf("                                                                                 `;-.          ___,\n");
+    printf("                                                                                   `.`\\_...._/`.-\"`\n");
+    printf("                                                                                     \\        /      ,\n");
+    printf("                                                                                     /()   () \\    .' `-._\n");
+    printf("                                                                                    |)  .    ()\\  /   _.'\n");
+    printf("                                                                                    \\  -'-     ,; '. <\n");
+    printf("                                                                                     ;.__     ,;|   > \n");
+    printf("                                                                                    / ,    / ,  |.-'.-'\n");
+    printf("                                                                                   (_/    (_/ ,;|.<`\n");
+    printf("                                                                                     \\    ,     ;-`\n");
+    printf("                                                                                      >   \\    /\n");
+    printf("                                                                                     (_,-'`> .'\n");
+    printf("                                                                                          (_,' \n");
     //界面
     SetPosition(getx,gety);
     printf("┌-----------------超市管理系统---------------┐");
@@ -22,6 +36,7 @@ void Menu()
         SetPosition(getx+46,gety+j);
         printf("|");
     }
+
     SetPosition(getx+16,gety+2);
     printf("1.添加商品信息\n");
     SetPosition(getx+16,gety+3);
@@ -44,6 +59,7 @@ void Menu()
     printf("0.退出\n");
     SetPosition(getx+8,gety+14);
     printf("请输入0-9之间的数字:");
+    fflush(stdin);
     scanf("%d",&n);
     //界面
     switch(n)
